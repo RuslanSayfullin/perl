@@ -1,6 +1,6 @@
-from os import path
+from django.urls import path
 
-from handbook.views import index
+from .views import index
 
 urlpatterns = [
     path('', index)

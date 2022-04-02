@@ -3,12 +3,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 from catalog import settings
-from handbook.views import index
+from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('handbook/', index),
+    path('handbook/', include('handbook.urls')),
 ]
+
+urlpatterns += doc_urls
 
 if settings.DEBUG:
     import debug_toolbar
