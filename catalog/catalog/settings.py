@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'drf-yasg',
+    'drf_yasg',
 ] + ['handbook.apps.HandbookConfig',
     ]
 
