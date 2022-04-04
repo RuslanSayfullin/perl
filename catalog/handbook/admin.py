@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Directory, DirectoryVersion, DirectoryElement
+
+admin.site.register(Directory)
+
+admin.site.register(DirectoryVersion)
+
+admin.site.register(DirectoryElement)
