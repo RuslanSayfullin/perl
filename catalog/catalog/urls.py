@@ -7,6 +7,7 @@ from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('drf-auth/', include('rest_framework.urls')),   # аутентификация на основе сессий
     path('handbook/', include('handbook.urls')),
 ]
 
