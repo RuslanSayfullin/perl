@@ -116,10 +116,23 @@ python manage.py runserver
 перейдите по адресу: http://127.0.0.1:8000/admin и войдите под логином и паролем суперпользователя.
 Создайте нового пользователя, например:
 
-Логин: user1
-Пароль: v2xOoQNW
+username: user1
+password: v2xOoQNW
 
-Выйдите из учётной записи суперпользователя перейдите по адресу:и авторизуйтесь, 
-http://127.0.0.1:8000/drf-auth/login/
-и авторизуйтесь, используя логин и пароль, ранее созданного пользователя.
+Выйдите из учётной записи суперпользователя.
 
+Чтобы получить токен пользователя:
+Request method: GET
+URL: http://127.0.0.1:8000/drf-auth/login/
+Body:
+    username:
+    password:
+
+Example:
+curl --location --request GET 'http://localhost:8000/drf-auth/login/' \
+--form 'username=%username' \
+--form 'password=%password'
+
+Реализована авторизация на основе пакета Djoser:
+Информация о функционале пакета Djoser, представлена на странице оф. документации,  
+https://djoser.readthedocs.io/en/latest/base_endpoints.html
