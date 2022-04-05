@@ -5,7 +5,6 @@ from django.urls import reverse
 
 class Directory(models.Model):
     """Сущность Справочник"""
-    uuid = models.CharField(editable=False, unique=True, max_length=40, db_index=True)
     short_title = models.CharField(max_length=128, verbose_name="Короткое наименование")
     title = models.CharField(max_length=255, verbose_name="Наименование")
     description = models.TextField(null=True, blank=True, verbose_name="Описание")
@@ -23,12 +22,11 @@ class Directory(models.Model):
     class Meta:
         verbose_name = 'Справочник'
         verbose_name_plural = 'Справочники'
-        ordering = ['uuid', 'title']
+        ordering = ['pk', 'title']
 
 
 class DirectoryVersion(models.Model):
     """Версия справочника"""
-    uuid = models.CharField(editable=False, unique=True, max_length=40, db_index=True)
     title = models.CharField(max_length=255, null=False, blank=False, verbose_name="Версия справочника")
     started_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата начала действия справочника этой версии")
     directory = models.ForeignKey(Directory, verbose_name='Справочник', on_delete=models.CASCADE)
@@ -43,15 +41,15 @@ class DirectoryVersion(models.Model):
     class Meta:
         verbose_name = 'Версия справочника'
         verbose_name_plural = 'Версий справочника'
-        ordering = ['uuid', 'title']
+        ordering = ['pk', 'title']
 
 
 class DirectoryElement(models.Model):
     """Элемент справочника"""
-    uuid = models.CharField(editable=False, unique=True, max_length=40, db_index=True)
-    directory_version = models.ForeignKey(Directory, verbose_name='Справочник версия', on_delete=models.CASCADE)
+    directory_version = models.ForeignKey(DirectoryVersion, verbose_name='Справочник версия', on_delete=models.CASCADE)
     title = models.CharField(max_length=255, null=False, blank=False, verbose_name="Элемент справочника")
     description = models.TextField(null=False, blank=False, verbose_name="Значение элемента")
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -62,4 +60,4 @@ class DirectoryElement(models.Model):
     class Meta:
         verbose_name = 'Элемент справочника'
         verbose_name_plural = 'Элементы справочника'
-        ordering = ['uuid', 'title']
+        ordering = ['pk', 'title']
