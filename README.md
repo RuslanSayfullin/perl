@@ -136,3 +136,82 @@ curl --location --request GET 'http://localhost:8000/drf-auth/login/' \
 Реализована авторизация на основе пакета Djoser:
 Информация о функционале пакета Djoser, представлена на странице оф. документации,  
 https://djoser.readthedocs.io/en/latest/base_endpoints.html
+
+
+========================================================================================================================
+Чтобы создать Словарь:
+
+    Request method: POST
+    URL: http://localhost:8000/handbook/api/v1/directory/
+    Header:
+        Authorization: Token userToken
+    Body:
+        short_title: short_title of directory
+        title: title of directory
+        description: description of directory
+        is_actual: False/True
+        pub_date: publication date can be set only when poll is created, format: YYYY-MM-DD HH:MM:SS
+        updated_at: poll updated_at date, format: YYYY-MM-DD HH:MM:SS
+    Example:
+
+curl --location --request POST 'http://localhost:8000/handbook/api/v1/directory/' \
+--header 'Authorization: Token %userToken' \
+--form 'short_title=%short_title of directory' \
+--form 'title=%title of directory' \
+--form 'description=%description of directory' \
+--form 'is_actual=%False/True' \
+--form 'pub_date=%pub_date' \
+--form 'updated_at=%updated_date \
+
+
+Обновить Словарь:
+
+    Request method: PATCH
+    URL: http://localhost:8000/handbook/api/v1/directory/[directory_id]/
+    Header:
+        Authorization: Token userToken
+    Param:
+        directory_id
+    Body:
+        short_title: short_title of directory
+        title: title of directory
+        description: description of directory
+        is_actual: False/True
+        pub_date: publication date can be set only when poll is created, format: YYYY-MM-DD HH:MM:SS
+        updated_at: poll updated_at date, format: YYYY-MM-DD HH:MM:SS
+    Example:
+
+curl --location --request PATCH 'http://localhost:8000/handbook/api/v1/directory/[directory_id]/' \
+--header 'Authorization: Token %userToken' \
+--form 'short_title=%short_title of directory' \
+--form 'title=%title of directory' \
+--form 'description=%description of directory' \
+--form 'is_actual=%False/True' \
+--form 'pub_date=%pub_date' \
+--form 'updated_at=%updated_date \
+
+Удалить опрос:
+
+    Request method: DELETE
+    URL: http://localhost:8000/handbook/api/v1/directorydelete/[directory_id]/
+    Header:
+        Authorization: Token userToken
+    Param:
+        poll_id Example:
+
+curl --location --request DELETE 'http://localhost:8000/handbook/api/v1/directorydelete/[directory_id]/' \
+--header 'Authorization: Token %userToken'
+
+Посмотреть все опросы:
+
+    Request method: GET
+    URL: http://localhost:8000/handbook/api/v1/directory/
+    Header:
+        Authorization: Token userToken
+    Example:
+
+curl --location --request GET 'http://localhost:8000/handbook/api/v1/directory/' \
+--header 'Authorization: Token %userToken'
+
+
+========================================================================================================================
