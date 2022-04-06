@@ -7,7 +7,7 @@ class DirectorySerializer(serializers.ModelSerializer):
     """Сериализатор для модели Справочник"""
     class Meta:
         model = Directory
-        fields = ("short_title", "title", "description", "is_actual")
+        fields = ("short_title", "title", "description", "started_at", "is_actual")
 
 
 class DirectoryVersionSerializer(serializers.ModelSerializer):

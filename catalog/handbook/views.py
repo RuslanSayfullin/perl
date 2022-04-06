@@ -1,5 +1,8 @@
 from django.http import HttpResponse
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Directory
 from .serializers import DirectorySerializer, DirectoryVersionSerializer, DirectoryElementSerializer
@@ -11,9 +14,23 @@ def index(request):
 
 # Представления для модели Словарь
 class DirectoryAPIList(generics.ListCreateAPIView):
-    """Получение списка справочников"""
+    """Получение списка справочников, создание новых справочников"""
     queryset = Directory.objects.all()
     serializer_class = DirectorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )  # получить список справочников может любой, а добавить только после аутентификаций
+
+
+# Представления для модели Словарь
+class DirectoryActualAPIList(APIView):
+    """Получение списка справочников, актуальных на указанную дату"""
+    def get(self, request):
+        queryset = Directory.objects.filter(is_actual=True).filter(started_at_lte=request.data['started_at']).values()
+        return Response({'directory': list(queryset)})
+
+
+
+
+
 
 
 class DirectoryAPIUpdate(generics.RetrieveUpdateAPIView):
