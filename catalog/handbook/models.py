@@ -28,7 +28,8 @@ class Directory(models.Model):
 
 class DirectoryVersion(models.Model):
     """Версия справочника"""
-    title = models.CharField(max_length=255, null=False, blank=False, verbose_name="Версия справочника")
+    title = models.CharField(max_length=255, null=False, blank=False, verbose_name="Наименование")
+    version = models.CharField(max_length=255, null=True, blank=True, verbose_name="Версия")
     directory = models.ForeignKey(Directory, verbose_name='Справочник', on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 

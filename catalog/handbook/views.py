@@ -23,7 +23,7 @@ class DirectoryAPIList(generics.ListCreateAPIView):
 # Представления для модели Словарь
 class DirectoryActualAPIList(APIView):
     """Получение списка справочников, актуальных на указанную дату"""
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         queryset = Directory.objects.filter(is_actual=True).filter(started_at_lte=request.data['started_at']).values()
         return Response({'directory': list(queryset)})
 
