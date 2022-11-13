@@ -4,12 +4,11 @@ use warnings;
 
 my $n=shift // die "Нужно неотрицательное число!\n";
 
-print '*' x $n, "\n" if $n;
-
-for(1..$n-2)
+for my $j(0..$n-1)
 {
-	print '*', ' ' x ($n-2), "*\n";
+	for my $i(0..$n-1)
+	{
+		print((($i+$j)%2)? ' ': '*');
+	}
+	print "\n";
 }
-
-print '*' x $n, "\n" if $n>1;
-
